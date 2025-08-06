@@ -224,8 +224,8 @@
         </div>
 
         <div class="tab-container">
-            <button class="tab active" onclick="showTab('manual')">手動輸入中途點</button>
-            <button class="tab" onclick="showTab('excel')">從 Excel 匯入中途點</button>
+            <button class="tab active" onclick="showTab('manual')">手動輸入</button>
+            <button class="tab" onclick="showTab('excel')">從 Excel 匯入</button>
         </div>
 
         <div id="manual" class="tab-content active">
@@ -347,6 +347,15 @@
         function generateUrl() {
             const startPoint = document.getElementById('start-point').value.trim();
             const endPoint = document.getElementById('end-point').value.trim();
+
+            // 檢查起點或終點是否為空，並跳出確認對話框
+            if (!startPoint || !endPoint) {
+                // 如果使用者點擊「取消」，就中斷函式
+                if (!confirm('未輸入起訖地點，仍要繼續嗎？')) {
+                    return; 
+                }
+            }
+		
             const activeTab = document.querySelector('.tab-content.active').id;
             
             let intermediatePoints = [];
